@@ -1,21 +1,22 @@
 package mycompany.api.image.api.model;
 
-public class User {
+import javax.persistence.*;
 
-    private int size;
+@Entity
+@Table(name = "images")
+public class Image {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
+    private String id;
 
-    public User(String name, int size) {
-        this.size = size;
+    public Image() {}
+
+    public Image(String name, String id) {
+        super();
         this.name = name;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
+        this.id = id;
     }
 
     public String getName() {
@@ -24,5 +25,19 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+
+        return "Image{" + "id=" + id + ", name= '" + name + '}';
     }
 }

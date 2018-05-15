@@ -1,20 +1,32 @@
 package mycompany.api.image.api;
 
+import mycompany.api.image.api.controllers.ImageController;
+import mycompany.api.image.api.service.ImageService;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import javax.annotation.PostConstruct;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
 import javax.ws.rs.ApplicationPath;
-import static org.apache.catalina.webresources.TomcatURLStreamHandlerFactory.register;
 
+
+@ApplicationPath("/app")
 @Configuration
-@ApplicationPath("rest")
-public class JerseyConfig {
+public class JerseyConfig extends ResourceConfig {
+
     public JerseyConfig() {
-
+        packages(getClass().getPackage().getName() + ".resources");
+        register(ImageController.class);
+        register(ImageService.class);
     }
 
-    @PostConstruct
-    public void setUp() {
-        register();
-        register();
-    }
+    @Bean
+    public ViewResolver viewResolver() {
+
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/");
+        resolver.setSuffix(".json");
+        return resolver;
+   }
 }

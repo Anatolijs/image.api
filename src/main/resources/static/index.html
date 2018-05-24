@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring + React REST</title>
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+
+    <div id="react"></div>
+    <script type="text/jsx">
+        const JavaEEWSTest = React.createClass({
+            getInitialState: function () {
+                return {text: 'Funky Monkey'};
+            },
+            componentDidMount: function(){
+                $.ajax({
+                    url: "http://localhost:8090/app/images"
+                }).then(function(data) {
+                    this.setState({text: data});
+                }).bind(this)
+            },
+            render: function() {
+                return <div>Response - {this.state.text}</div>;
+            }
+        });
+
+        React.render(<JavaEEWSTest />, document.getElementById('react'));
+    </script>
+</body>
+</html>
+
+

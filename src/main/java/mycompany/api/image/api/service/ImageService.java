@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public class ImageService {
+
     private ImageRepo imageRepo;
 
     public ImageService(ImageRepo imageRepo) {
@@ -18,7 +19,7 @@ public class ImageService {
         return imageRepo.findAll();
     }
 
-    public Iterable<Image> saveAll(List<Image> images) {
-        return imageRepo.saveAll(images);
+    public Iterable<Image> saveAll(List<Image> image) {
+        return imageRepo.saveAll(image);
     }
 }
